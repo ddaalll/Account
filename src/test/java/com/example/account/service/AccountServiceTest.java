@@ -8,6 +8,7 @@ import com.example.account.repository.AccountUserRepository;
 import com.example.account.type.AccountStatus;
 import com.example.account.repository.AccountRepository;
 import com.example.account.type.ErrorCode;
+import org.hibernate.validator.constraints.time.DurationMax;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -101,10 +102,21 @@ class AccountServiceTest {
     }
 
     @Test
+    @DisplayName("유저 당 최대 계좌는 10개")
         void createAccount_maxAccountIs10() {
         //given
-
+        AccountUser user = AccountUser.builder()
+                .id(15L)
+                .name("Pobi").build();
+        given(accountUserRepository.findById(anyLong()))
+                .willReturn(Optional.of(user));
+        given(accountRepository.countByAccountUser(any()))
+                .willReturn(10);
         //when
+        AccountException exception = assertThrows(AccountException.class,
+                () -> accountService.createAccount(1L, 1000L));
+
         //then
+        assertEquals(ErrorCode.MAX_COUNT_PER_USER_10, exception.getErrorCode());
     }
 }
