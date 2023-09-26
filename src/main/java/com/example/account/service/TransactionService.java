@@ -28,6 +28,7 @@ import static com.example.account.type.TransactionType.USE;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountUserRepository accountUserRepository;
@@ -71,8 +72,7 @@ public class TransactionService {
     private Transaction saveAndGetTransaction(
             TransactionResultType transactionResultType,
             Account account,
-            Long amount
-    ) {
+            Long amount) {
         return transactionRepository.save(
                 Transaction.builder()
                         .transactionType(USE)

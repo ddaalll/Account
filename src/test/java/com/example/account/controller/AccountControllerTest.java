@@ -99,10 +99,10 @@ class AccountControllerTest {
                                 .balance(1000L).build(),
                         AccountDto.builder()
                                 .accountNumber("1111111111")
-                                .balance(1000L).build(),
+                                .balance(2000L).build(),
                         AccountDto.builder()
                                 .accountNumber("2222222222")
-                                .balance(1000L).build()
+                                .balance(3000L).build()
                 );
         given(accountService.getAccountsByUserId(anyLong()))
                 .willReturn(accountDtos);
