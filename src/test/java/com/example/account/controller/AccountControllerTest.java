@@ -116,7 +116,6 @@ class AccountControllerTest {
                 .andExpect(jsonPath("$[1].balance").value(2000))
                 .andExpect(jsonPath("$[2].accountNumber").value("2222222222"))
                 .andExpect(jsonPath("$[2].balance").value(3000));
-
     }
 
     @Test
